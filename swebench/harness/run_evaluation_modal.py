@@ -22,7 +22,13 @@ from typing import cast
 
 app = modal.App("swebench-evaluation")
 
-swebench_image = modal.Image.debian_slim().pip_install("swebench", "tenacity")
+swebench_image = (
+    modal.Image.debian_slim()
+    .pip_install("swebench", "tenacity")
+    .pip_install(
+        "git+https://github.com/AlienKevin/SWE-ReX.git@kevin/multilingual-on-modal"
+    )
+)
 
 from swebench.harness.constants import (
     APPLY_PATCH_FAIL,
